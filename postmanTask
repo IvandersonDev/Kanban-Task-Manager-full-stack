@@ -1,0 +1,115 @@
+{
+  "info": {
+    "name": "Kanban Task Manager",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth - Registrar",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"joao\",\n  \"password\": \"SenhaForte1\",\n  \"fullName\": \"João Silva\",\n  \"email\": \"joao@example.com\"\n}"
+        },
+        "url": { "raw": "http://localhost:8080/api/auth/register", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api", "auth", "register"] }
+      }
+    },
+    {
+      "name": "Auth - Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"joao\",\n  \"password\": \"SenhaForte1\"\n}"
+        },
+        "url": { "raw": "http://localhost:8080/api/auth/login", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api", "auth", "login"] }
+      }
+    },
+    {
+      "name": "Tasks - Listar todas",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" }
+        ],
+        "url": { "raw": "http://localhost:8080/api/tasks", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api", "tasks"] }
+      }
+    },
+    {
+      "name": "Tasks - Criar",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Planejar sprint\",\n  \"description\": \"Revisar backlog com o time\",\n  \"priority\": \"HIGH\",\n  \"dueDate\": \"2025-09-30\"\n}"
+        },
+        "url": { "raw": "http://localhost:8080/api/tasks", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api", "tasks"] }
+      }
+    },
+    {
+      "name": "Tasks - Atualizar dados",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"description\": \"Revisar backlog com priorização\",\n  \"priority\": \"MEDIUM\",\n  \"dueDate\": \"2025-10-05\"\n}"
+        },
+        "url": { "raw": "http://localhost:8080/api/tasks/1", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api", "tasks", "1"] }
+      }
+    },
+    {
+      "name": "Tasks - Mover tarefa",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": \"IN_PROGRESS\",\n  \"newPosition\": 0\n}"
+        },
+        "url": { "raw": "http://localhost:8080/api/tasks/1/move", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api", "tasks", "1", "move"] }
+      }
+    },
+    {
+      "name": "Tasks - Excluir",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" }
+        ],
+        "url": { "raw": "http://localhost:8080/api/tasks/1", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api", "tasks", "1"] }
+      }
+    },
+    {
+      "name": "Tasks - Exportar PDF",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" }
+        ],
+        "url": { "raw": "http://localhost:8080/api/tasks/export/pdf", "protocol": "http", "host": ["localhost"], "port": "8080", "path": ["api", "tasks", "export", "pdf"] }
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    { "key": "token", "value": "" }
+  ]
+}
